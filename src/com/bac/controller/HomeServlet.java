@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bac.model.Student;
+import com.bac.service.StudentService;
+import com.bac.service.impl.StudentServiceImpl;
+
 /**
  * Servlet implementation class HomeServlet
  */
@@ -28,6 +32,17 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		StudentService studentService = new StudentServiceImpl();
+		
+		String id = request.getParameter("id");
+		String firstname = request.getParameter("firstname");
+		Student student = new Student();
+		
+		student.setFirstName(firstname);
+		student.setId(Integer.parseInt(id));
+		
+		studentService.saveStudent(student);
 	}
 
 	/**
